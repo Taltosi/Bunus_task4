@@ -1,14 +1,13 @@
-Makefile
 CC=gcc
 CFLAGS=-Wall -Wextra -Wpedantic -pthread -std=c11
 LIBS=-lproactor
 
 all: chat
 
-chat: chat.o
-	$(CC) $(CFLAGS) -o chat chat.o $(LIBS)
+chat: chat.o libproactor.a
+	$(CC) $(CFLAGS) -o chat chat.o -L. $(LIBS)
 
-chat.o: chat.c
+chat.o: chat.c chat.h
 	$(CC) $(CFLAGS) -c chat.c
 
 libproactor.a: proactor.o
